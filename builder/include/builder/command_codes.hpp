@@ -14,6 +14,8 @@ enum class Codes : u8 {
 
   kReadMemory = 0x05,
   kUploadMemory = 0x41,
+
+  kExecuteAssembly = 0x81
 };
 }  // namespace builder
 

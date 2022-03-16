@@ -78,3 +78,17 @@ int Read(u8* buf, u32* written, u32 limit, u32 addr, u32 size) {
   *written = 1 + 4 + 4 + 4;
   return 0;
 }
+
+int ExecuteAssembly(u8* buf, u32* written, u32 limit, u32* code, u32 length) {
+  u32 code_length = 4 * length;
+  if (limit < 1 + 4 + code_length) {
+    return -1;
+  }
+  buf[0] = static_cast<u8>(Codes::kExecuteAssembly);
+  write_u32(buf + 1, code_length);
+  for (u32 i = 0; i < length; i++) {
+    write_u32(buf + 5 + 4 * i, code[i]);
+  }
+  *written = 1 + 4 + code_length;
+  return 0;
+}
