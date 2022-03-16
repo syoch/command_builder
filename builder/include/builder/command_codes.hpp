@@ -19,4 +19,4 @@ enum class Codes : u8 {
 };
 }  // namespace builder
 
-#endif BUILDER_COMMAND_CODES
+#endif
