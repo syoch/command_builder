@@ -25,3 +25,7 @@ add_test(NAME write8 COMMAND write8)
 add_executable(write_kern write_kern.cpp)
 target_link_libraries(write_kern builder)
 add_test(NAME write_kern COMMAND write_kern)
+
+add_executable(execute_assembly execute_assembly.cpp)
+target_link_libraries(execute_assembly builder)
+add_test(NAME execute_assembly COMMAND execute_assembly)

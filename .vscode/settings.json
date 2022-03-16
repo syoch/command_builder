@@ -3,7 +3,7 @@
   "saveAndRun": {
     "commands": [
       {
-        "cmd": "ninja -C build all test",
+        "cmd": "ninja -C build && ninja -C build test",
         "notMatch": "CMakeLists.txt"
       }
     ]
