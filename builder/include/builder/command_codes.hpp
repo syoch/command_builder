@@ -16,7 +16,10 @@ enum class Codes : u8 {
   kReadDataMemory = 0x04,
   kUploadMemory = 0x41,
 
-  kExecuteAssembly = 0x81
+  kExecuteAssembly = 0x81,
+
+  kGetSymbol = 0x71,
+  kRemoteProcedureCall = 0x70
 };
 }  // namespace builder
 
