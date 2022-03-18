@@ -16,6 +16,7 @@ int ReadKernel(u8* buf, u32* written, u32 limit, u32 addr);
 
 int Write(u8* buf, u32* written, u32 limit, u32 addr, u8* data, u32 size);
 int Read(u8* buf, u32* written, u32 limit, u32 addr, u32 size);
+int ReadData(u8* buf, u32* written, u32 limit, u32 addr, u32 size);
 
 int ExecuteAssembly(u8* buf, u32* written, u32 limit, u32* code, u32 length);
 

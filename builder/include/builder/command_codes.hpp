@@ -13,6 +13,7 @@ enum class Codes : u8 {
   kKernelRead = 0x0C,
 
   kReadMemory = 0x05,
+  kReadDataMemory = 0x04,
   kUploadMemory = 0x41,
 
   kExecuteAssembly = 0x81

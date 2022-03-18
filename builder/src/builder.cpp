@@ -78,7 +78,16 @@ int Read(u8* buf, u32* written, u32 limit, u32 addr, u32 size) {
   *written = 1 + 4 + 4 + 4;
   return 0;
 }
-
+int ReadData(u8* buf, u32* written, u32 limit, u32 addr, u32 size) {
+  if (limit < 1 + 4 + 4) {
+    return -1;
+  }
+  buf[0] = static_cast<u8>(Codes::kReadDataMemory);
+  write_u32(buf + 1, addr);
+  write_u32(buf + 5, addr + size);
+  *written = 1 + 4 + 4;
+  return 0;
+}
 int ExecuteAssembly(u8* buf, u32* written, u32 limit, u32* code, u32 length) {
   u32 code_length = 4 * length;
   if (limit < 1 + 4 + code_length) {

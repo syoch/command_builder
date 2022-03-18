@@ -2,6 +2,10 @@ add_executable(read read.cpp)
 target_link_libraries(read builder)
 add_test(NAME read COMMAND read)
 
+add_executable(read_data read_data.cpp)
+target_link_libraries(read_data builder)
+add_test(NAME read_data COMMAND read_data)
+
 add_executable(read_kern read_kern.cpp)
 target_link_libraries(read_kern builder)
 add_test(NAME read_kern COMMAND read_kern)
