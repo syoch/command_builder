@@ -101,3 +101,32 @@ int ExecuteAssembly(u8* buf, u32* written, u32 limit, u32* code, u32 length) {
   *written = 1 + 4 + code_length;
   return 0;
 }
+
+int GetSymbol(u8* buf, u32* written, u32 limit, u8 is_data,
+              const char* rpl_name, u32 rpl_name_size, const char* symbol_name,
+              u32 symbol_name_size) {
+  if (limit < 1 + 1 + 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1 + 1) {
+    return -1;
+  }
+
+  const u32 rpl_name_offset = 4 + 4;
+  const u32 symbol_name_offset = rpl_name_offset + rpl_name_size + 1;
+
+  buf[0] = static_cast<u8>(Codes::kGetSymbol);
+  buf[1] = 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1;
+  write_u32(buf + 2, rpl_name_size - 4);
+  write_u32(buf + 6, symbol_name_offset);
+
+  memcpy(buf + 2 + rpl_name_offset, rpl_name, rpl_name_size);
+  memcpy(buf + 2 + symbol_name_offset, symbol_name, symbol_name_size);
+
+  buf[2 + rpl_name_offset + rpl_name_size] = 0;
+  buf[2 + symbol_name_offset + symbol_name_size] = 0;
+  buf[2 + symbol_name_offset + symbol_name_size + 1] = is_data;
+
+  *written = 1 + 1 + 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1 + 1;
+  return 0;
+}
+
+int RemoteProcedureCall(u8* buf, u32* written, u32 limit, u32 addr,
+                        u32 args[8]) {}
