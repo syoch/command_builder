@@ -20,8 +20,9 @@ int ReadData(u8* buf, u32* written, u32 limit, u32 addr, u32 size);
 
 int ExecuteAssembly(u8* buf, u32* written, u32 limit, u32* code, u32 length);
 
-int GetSymbol(u8* buf, u32* written, u32 limit, const char* rpl_name,
-              u32 rpl_name_size, const char* symbol_name, u32 symbol_name_size);
+int GetSymbol(u8* buf, u32* written, u32 limit, u8 is_data,
+              const char* rpl_name, u32 rpl_name_size, const char* symbol_name,
+              u32 symbol_name_size);
 int RemoteProcedureCall(u8* buf, u32* written, u32 limit, u32 addr,
                         u32 args[8]);
 
