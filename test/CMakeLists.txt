@@ -33,3 +33,11 @@ add_test(NAME write_kern COMMAND write_kern)
 add_executable(execute_assembly execute_assembly.cpp)
 target_link_libraries(execute_assembly builder)
 add_test(NAME execute_assembly COMMAND execute_assembly)
+
+add_executable(get_symbol get_symbol.cpp)
+target_link_libraries(get_symbol builder)
+add_test(NAME get_symbol COMMAND get_symbol)
+
+add_executable(remote_procedure_call remote_procedure_call.cpp)
+target_link_libraries(remote_procedure_call builder)
+add_test(NAME remote_procedure_call COMMAND remote_procedure_call)
