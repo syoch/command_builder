@@ -112,17 +112,26 @@ int GetSymbol(u8* buf, u32* written, u32 limit, u8 is_data,
   const u32 rpl_name_offset = 4 + 4;
   const u32 symbol_name_offset = rpl_name_offset + rpl_name_size + 1;
 
-  buf[0] = static_cast<u8>(Codes::kGetSymbol);
-  buf[1] = 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1;
-  write_u32(buf + 2, rpl_name_size - 4);
-  write_u32(buf + 6, symbol_name_offset);
+  u32 offset = 0;
 
-  memcpy(buf + 2 + rpl_name_offset, rpl_name, rpl_name_size);
-  memcpy(buf + 2 + symbol_name_offset, symbol_name, symbol_name_size);
+  buf[offset++] = static_cast<u8>(Codes::kGetSymbol);
+  buf[offset++] = 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1;
 
-  buf[2 + rpl_name_offset + rpl_name_size] = 0;
-  buf[2 + symbol_name_offset + symbol_name_size] = 0;
-  buf[2 + symbol_name_offset + symbol_name_size + 1] = is_data;
+  write_u32(buf + offset, rpl_name_size - 4);
+  offset += 4;
+
+  write_u32(buf + offset, symbol_name_offset);
+  offset += 4;
+
+  memcpy(buf + offset, rpl_name, rpl_name_size);
+  offset += rpl_name_size;
+
+  buf[offset++] = 0;
+
+  memcpy(buf + offset, symbol_name, symbol_name_size);
+  offset += symbol_name_size;
+
+  buf[offset++] = is_data;
 
   *written = 1 + 1 + 4 + 4 + rpl_name_size + 1 + symbol_name_size + 1 + 1;
   return 0;
