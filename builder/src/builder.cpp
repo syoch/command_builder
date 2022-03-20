@@ -138,4 +138,17 @@ int GetSymbol(u8* buf, u32* written, u32 limit, u8 is_data,
 }
 
 int RemoteProcedureCall(u8* buf, u32* written, u32 limit, u32 addr,
-                        u32 args[8]) {}
+                        u32 args[8]) {
+  if (limit < 1 + 4 + 4 * 8) {
+    return -1;
+  }
+
+  buf[0] = static_cast<u8>(Codes::kRemoteProcedureCall);
+  write_u32(buf + 1, addr);
+  for (u32 i = 0; i < 8; i++) {
+    write_u32(buf + 1 + 4 + 4 * i, args[i]);
+  }
+
+  *written = 1 + 4 + 4 * 8;
+  return 0;
+}
